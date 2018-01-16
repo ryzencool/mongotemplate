@@ -1,4 +1,4 @@
-### 总结
+### 目标：很愉快的使用spring mongo data jpa来进行复杂的查询
 
 ##### 技术栈：
     *  kotlin
