@@ -30,14 +30,12 @@ open class JpaMongoTemplate<T> {
         try {
             for (field in fields) {
                 field.isAccessible = true
-                if (field.get(condition) != null) {
-                    if (field.type.name == java.lang.String::class.java.name) {
-                        criteria.and(field.name).regex(field.get(condition) as String)
-                    } else if (field.type.name == Int::class.java.name
-                            || field.type.name == Double::class.java.name
-                            || field.type.name == Float::class.java.name
-                            || field.type.name == Long::class.java.name) {
-                        criteria.and(field.name).`is`(field.get(condition))
+                val ins = field.get(condition)
+                if (ins != null) {
+                    if (ins is String) {
+                        criteria.and(field.name).regex(ins)
+                    } else if (ins is Int || ins is Double|| ins is Float|| ins is Long) {
+                        criteria.and(field.name).`is`(ins)
                     }
                 }
             }
